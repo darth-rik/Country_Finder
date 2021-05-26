@@ -18,16 +18,17 @@ const Header = () => {
 };
 
 const Wrapper = styled.div`
+	background-color: ${({ theme }) => theme.elements};
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 20px;
-
+	padding: 2rem;
+	font-size: 1.4rem;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const Title = styled.h1`
-	font-size: 16px;
+	font-size: 1.6rem;
 `;
 
 const ToggleMode = styled.div`
@@ -36,7 +37,7 @@ const ToggleMode = styled.div`
 `;
 
 const Icon = styled.div`
-	margin-right: 6px;
+	margin-right: 1rem;
 `;
 
 export default Header;
