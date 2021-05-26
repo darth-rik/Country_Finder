@@ -38,6 +38,8 @@ const ToggleMode = styled.div`
 
 const Icon = styled.div`
 	margin-right: 1rem;
+	display: flex;
+	align-items: center;
 `;
 
 export default Header;
