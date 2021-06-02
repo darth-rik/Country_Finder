@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import SearchCountry from "../features/searchCountry/SearchCountry";
+import FilterRegion from "../features/filterRegion/FilterRegion";
 
 const Home = () => {
 	return (
@@ -9,6 +10,7 @@ const Home = () => {
 			<Header />
 			<Container>
 				<SearchCountry />
+				<FilterRegion />
 			</Container>
 		</>
 	);
