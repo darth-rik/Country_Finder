@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { IoIosArrowDown } from "react-icons/io";
+import { device } from "../../styles/breakpoints";
 
 const FilterRegion = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,12 +10,9 @@ const FilterRegion = () => {
 		isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true);
 	};
 	return (
-		<>
-			<Filter>
-				<p>Filter By Region</p>
-				<IoIosArrowDown onClick={toggleFilterMenu} />
-			</Filter>
-
+		<Filter onClick={toggleFilterMenu}>
+			<p>Filter By Region</p>
+			<IoIosArrowDown />
 			<FilterOptions menuOpen={isMenuOpen}>
 				<li>Africa</li>
 				<li>America</li>
@@ -22,7 +20,7 @@ const FilterRegion = () => {
 				<li>Europe</li>
 				<li>Oceania</li>
 			</FilterOptions>
-		</>
+		</Filter>
 	);
 };
 
@@ -37,11 +35,15 @@ const Filter = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-	z-index: 100;
+	cursor: pointer;
+
+	@media ${device.laptopL} {
+		width: 20%;
+		margin-top: 0rem;
+	}
 `;
 
 const FilterOptions: any = styled.ul<{ menuOpen: boolean }>`
-	margin-top: 0.2rem;
 	width: 20rem;
 	padding: 1.5rem 1rem;
 	border-radius: 5px;
@@ -52,9 +54,11 @@ const FilterOptions: any = styled.ul<{ menuOpen: boolean }>`
 	transition: all 0.5s;
 	position: absolute;
 	z-index: 100;
-
+	top: 60px;
+	left: 0px;
 	& > * {
 		padding: 0.5rem;
+		cursor: pointer;
 
 		&:hover {
 			background-color: #dbdada;

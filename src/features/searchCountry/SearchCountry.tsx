@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { device } from "../../styles/breakpoints";
 
 const SearchCountry = () => {
 	return (
@@ -15,7 +16,6 @@ const SearchCountry = () => {
 };
 
 const Wrapper = styled.div`
-	margin-top: 3rem;
 	background-color: #fff;
 	padding: 1.5rem 3rem;
 	border-radius: 5px;
@@ -28,12 +28,20 @@ const Wrapper = styled.div`
 		border: none;
 		outline: none;
 		font-size: 1.6rem;
-		width: 60%;
+		width: 100%;
 		background-color: inherit;
 
 		&::placeholder {
 			color: hsl(0, 0%, 52%);
 		}
+
+		@media ${device.laptopL} {
+			font-size: 1.8rem;
+		}
+	}
+
+	@media ${device.laptopL} {
+		width: 40%;
 	}
 `;
 const SearchIcon = styled.div`
