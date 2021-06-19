@@ -1,19 +1,14 @@
 import React from "react";
-import { IoMoonOutline } from "react-icons/io5";
+
 import styled from "styled-components";
+import DarkModeButton from "../features/darkModeButton/DarkModeButton";
 import { device } from "../styles/breakpoints";
 
 const Header = () => {
 	return (
 		<Wrapper>
 			<Title>Where in the world?</Title>
-			<ToggleMode>
-				<Icon>
-					<IoMoonOutline />
-				</Icon>
-
-				<p>Dark Mode</p>
-			</ToggleMode>
+			<DarkModeButton />
 		</Wrapper>
 	);
 };
@@ -39,18 +34,6 @@ const Title = styled.h1`
 	@media ${device.laptopL} {
 		font-size: 2rem;
 	}
-`;
-
-const ToggleMode = styled.div`
-	display: flex;
-	align-items: center;
-`;
-
-const Icon = styled.div`
-	margin-right: 1rem;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
 `;
 
 export default Header;

@@ -32,7 +32,7 @@ const Wrapper = styled.div`
 		background-color: inherit;
 
 		&::placeholder {
-			color: hsl(0, 0%, 52%);
+			color: ${({ theme }) => theme.text};
 		}
 
 		@media ${device.laptopL} {
@@ -46,7 +46,7 @@ const Wrapper = styled.div`
 `;
 const SearchIcon = styled.div`
 	font-size: 2rem;
-	color: hsl(0, 0%, 52%);
+	color: ${({ theme }) => theme.text};
 	display: flex;
 	align-items: center;
 	margin-right: 2rem;

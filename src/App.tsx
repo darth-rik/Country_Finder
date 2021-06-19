@@ -7,11 +7,11 @@ import Details from "./pages/Details";
 
 function App() {
 	return (
-		<ThemeProvider theme={lightTheme}>
+		<ThemeProvider theme={darkTheme}>
 			<GlobalStyles />
 			<Fragment>
-				{/* <Home /> */}
-				<Details />
+				<Home />
+				{/* <Details /> */}
 			</Fragment>
 		</ThemeProvider>
 	);
