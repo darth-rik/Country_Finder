@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import darkModeButtonReducer from "./features/darkModeButton/darkModeButtonSlice";
 
 export default configureStore({
-	reducer: {},
+	reducer: {
+		darkMode: darkModeButtonReducer,
+	},
 });
