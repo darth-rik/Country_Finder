@@ -1,8 +1,9 @@
 import React from "react";
 
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../store";
 import { toggleMode } from "./darkModeButtonSlice";
 
 const DarkModeButton = () => {
@@ -12,9 +13,7 @@ const DarkModeButton = () => {
 		dispatch(toggleMode(isDarkModeOn ? false : true));
 	};
 
-	const { isDarkModeOn } = useSelector(
-		(state: RootStateOrAny) => state.darkMode
-	);
+	const { isDarkModeOn } = useSelector((state: RootState) => state.darkMode);
 
 	return (
 		<DarkModeToggle onClick={toggler}>

@@ -1,25 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-const CountryCard = () => {
+const CountryCard = ({
+	country: { flag, name, population, capital, region },
+}: any) => {
 	return (
 		<CardContainer>
 			<CountryFlag>
-				<img src='https://restcountries.eu/data/umi.svg' alt='' />
+				<img src={flag} alt={`flag of ${name}`} />
 			</CountryFlag>
 			<InfoContainer>
-				<CountryName>United States Of America</CountryName>
+				<CountryName>{name}</CountryName>
 				<CountryDetails>
 					<h2>Population:</h2>
-					<p>323,221,112</p>{" "}
+					<p>{population.toLocaleString("en-US")}</p>{" "}
 				</CountryDetails>
 				<CountryDetails>
 					<h2>Region:</h2>
-					<p>Americas</p>{" "}
+					<p>{region}</p>{" "}
 				</CountryDetails>
 				<CountryDetails>
 					<h2>Capital:</h2>
-					<p>Washington D.C</p>{" "}
+					<p>{capital}</p>{" "}
 				</CountryDetails>
 			</InfoContainer>
 		</CardContainer>
@@ -35,8 +37,9 @@ const CardContainer = styled.div`
 
 const CountryFlag = styled.div`
 	img {
-		height: 100%;
+		height: 25rem;
 		width: 100%;
+		object-fit: fill;
 	}
 `;
 const CountryName = styled.h1`

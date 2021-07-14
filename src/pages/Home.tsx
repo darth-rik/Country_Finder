@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Header from "../components/Header";
 import SearchCountry from "../features/searchCountry/SearchCountry";
 import FilterRegion from "../features/filterRegion/FilterRegion";
-import CountryCard from "../features/countryCard/CountryCard";
+import CountryCard from "../components/CountryCard";
+import { getAllCountries } from "../features/countryCard/countryCardSlice";
+import Loader from "../components/Loader";
 import { device } from "../styles/breakpoints";
+import { RootState } from "../store";
 
 const Home = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getAllCountries());
+	}, []);
+
+	const { countriesData, loading } = useSelector(
+		(state: RootState) => state.countriesData
+	);
+
 	return (
 		<>
 			<Header />
@@ -14,12 +28,15 @@ const Home = () => {
 				<SearchCountry />
 				<FilterRegion />
 			</Container>
-			<CountriesContainer>
-				<CountryCard />
-				<CountryCard />
-				<CountryCard />
-				<CountryCard />
-			</CountriesContainer>
+			{!loading ? (
+				<CountriesContainer>
+					{countriesData.map((country: any, index: number) => (
+						<CountryCard key={index} country={country} />
+					))}
+				</CountriesContainer>
+			) : (
+				<Loader />
+			)}
 		</>
 	);
 };
@@ -37,7 +54,7 @@ const Container = styled.div`
 const CountriesContainer = styled.div`
 	margin: 3rem 2rem;
 	display: grid;
-	gap: 2rem;
+	gap: 3rem;
 	@media ${device.tablet} {
 		grid-template-columns: repeat(2, 1fr);
 	}
