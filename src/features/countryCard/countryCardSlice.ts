@@ -13,6 +13,21 @@ export const getAllCountries: any = createAsyncThunk(
 	}
 );
 
+export const getCountriesByRegion: any = createAsyncThunk(
+	"allCountries/getCountriesByRegion",
+	async (region: string) => {
+		try {
+			const res = await fetch(
+				`https://restcountries.eu/rest/v2/region/${region}`
+			);
+			const data = await res.json();
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+);
+
 const allCountriesSlice = createSlice({
 	name: "allCountries",
 	initialState: {
@@ -25,6 +40,14 @@ const allCountriesSlice = createSlice({
 			state.loading = true;
 		},
 		[getAllCountries.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.countriesData = action.payload;
+		},
+
+		[getCountriesByRegion.pending]: (state) => {
+			state.loading = true;
+		},
+		[getCountriesByRegion.fulfilled]: (state, action) => {
 			state.loading = false;
 			state.countriesData = action.payload;
 		},

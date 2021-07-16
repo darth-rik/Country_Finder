@@ -1,21 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { IoIosArrowDown } from "react-icons/io";
 import { device } from "../../styles/breakpoints";
+import { getCountriesByRegion } from "../countryCard/countryCardSlice";
 
 const FilterRegion = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+	const dispatch = useDispatch();
+
 	const toggleFilterMenu = () => {
-		isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true);
+		setIsMenuOpen(!isMenuOpen);
 	};
 	return (
 		<Filter onClick={toggleFilterMenu}>
 			<p>Filter By Region</p>
 			<IoIosArrowDown />
-			<FilterOptions menuOpen={isMenuOpen}>
+			<FilterOptions
+				onClick={(e: React.ChangeEvent) => {
+					const region = e.target.innerHTML;
+
+					dispatch(getCountriesByRegion(region));
+				}}
+				menuOpen={isMenuOpen}
+			>
 				<li>Africa</li>
-				<li>America</li>
+				<li>Americas</li>
 				<li>Asia</li>
 				<li>Europe</li>
 				<li>Oceania</li>
