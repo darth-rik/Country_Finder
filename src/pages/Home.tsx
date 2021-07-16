@@ -8,6 +8,7 @@ import CountryCard from "../components/CountryCard";
 import { getAllCountries } from "../features/countryCard/countryCardSlice";
 import Loader from "../components/Loader";
 import { device } from "../styles/breakpoints";
+import LazyLoad from "react-lazyload";
 import { RootState } from "../store";
 
 const Home = () => {
@@ -31,7 +32,9 @@ const Home = () => {
 			{!loading ? (
 				<CountriesContainer>
 					{countriesData.map((country: any, index: number) => (
-						<CountryCard key={index} country={country} />
+						<LazyLoad key={index} offset={-100}>
+							<CountryCard country={country} />
+						</LazyLoad>
 					))}
 				</CountriesContainer>
 			) : (
