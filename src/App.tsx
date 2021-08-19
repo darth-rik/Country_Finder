@@ -17,8 +17,8 @@ const App = () => {
 			<GlobalStyles />
 			<Fragment>
 				<Header />
-				<Home />
-				{/* <Details /> */}
+				{/* <Home /> */}
+				<Details />
 			</Fragment>
 		</ThemeProvider>
 	);

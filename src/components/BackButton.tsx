@@ -7,7 +7,7 @@ const BackButton = () => {
 	return (
 		<Wrapper>
 			<BsArrowLeft />
-			<p>Back</p>
+			<span>Back</span>
 		</Wrapper>
 	);
 };

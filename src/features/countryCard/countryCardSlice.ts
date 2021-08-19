@@ -17,9 +17,13 @@ export const getCountriesByRegion: any = createAsyncThunk(
 	"allCountries/getCountriesByRegion",
 	async (region: string) => {
 		try {
-			const res = await fetch(
-				`https://restcountries.eu/rest/v2/region/${region}`
-			);
+			let res;
+			if (region === "All") {
+				res = await fetch(`https://restcountries.eu/rest/v2/all`);
+			} else {
+				res = await fetch(`https://restcountries.eu/rest/v2/region/${region}`);
+			}
+
 			const data = await res.json();
 			return data;
 		} catch (error) {
@@ -72,6 +76,7 @@ const allCountriesSlice = createSlice({
 			state.countriesData = action.payload;
 			state.error = false;
 		},
+
 		[searchCountryByName.pending]: (state) => {
 			state.loading = true;
 		},

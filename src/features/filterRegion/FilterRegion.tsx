@@ -7,6 +7,7 @@ import { getCountriesByRegion } from "../countryCard/countryCardSlice";
 
 const FilterRegion = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [selectedRegion, setSelectedRegion] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ const FilterRegion = () => {
 	};
 	return (
 		<Filter onClick={toggleFilterMenu}>
-			<p>Filter By Region</p>
+			<p>{selectedRegion ? selectedRegion : "Filter By Region"}</p>
 			<IoIosArrowDown />
 			<FilterOptions
 				onClick={(e: React.ChangeEvent) => {
@@ -24,10 +25,13 @@ const FilterRegion = () => {
 					}
 					const region = e.target.innerHTML;
 
+					setSelectedRegion(region);
+
 					dispatch(getCountriesByRegion(region));
 				}}
 				menuOpen={isMenuOpen}
 			>
+				<li>All</li>
 				<li>Africa</li>
 				<li>Americas</li>
 				<li>Asia</li>
