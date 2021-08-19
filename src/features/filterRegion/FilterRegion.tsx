@@ -56,7 +56,7 @@ const Filter = styled.div`
 
 const FilterOptions: any = styled.ul<{ menuOpen: boolean }>`
 	width: 20rem;
-	padding: 1.5rem 1rem;
+	padding: 1.5rem 0;
 	border-radius: 5px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 	background-color: ${({ theme }) => theme.elements};
@@ -68,7 +68,7 @@ const FilterOptions: any = styled.ul<{ menuOpen: boolean }>`
 	top: 60px;
 	left: 0px;
 	& > * {
-		padding: 0.5rem;
+		padding: 0.5rem 2rem;
 		cursor: pointer;
 
 		&:hover {
