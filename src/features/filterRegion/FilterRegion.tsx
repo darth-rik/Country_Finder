@@ -19,6 +19,9 @@ const FilterRegion = () => {
 			<IoIosArrowDown />
 			<FilterOptions
 				onClick={(e: React.ChangeEvent) => {
+					if (e.currentTarget === e.target) {
+						return;
+					}
 					const region = e.target.innerHTML;
 
 					dispatch(getCountriesByRegion(region));
