@@ -73,6 +73,7 @@ const FilterOptions: any = styled.ul<{ menuOpen: boolean }>`
 	& > * {
 		padding: 0.5rem 2rem;
 		cursor: pointer;
+		transition: all 0.2s;
 
 		&:hover {
 			background-color: #dbdada;

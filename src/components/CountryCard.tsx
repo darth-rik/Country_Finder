@@ -31,13 +31,20 @@ const CountryCard = ({
 const CardContainer = styled.div`
 	background-color: ${({ theme }) => theme.elements};
 	border-radius: 10px;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s;
+
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: 2px 8px 12px rgba(0, 0, 0, 0.2);
+	}
 `;
 
 const CountryFlag = styled.div`
 	img {
-		height: 25rem;
+		height: 20rem;
 		width: 100%;
 		object-fit: cover;
 	}

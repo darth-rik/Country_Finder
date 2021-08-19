@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Header from "../components/Header";
 import SearchCountry from "../features/searchCountry/SearchCountry";
 import FilterRegion from "../features/filterRegion/FilterRegion";
 import CountryCard from "../components/CountryCard";
