@@ -28,11 +28,30 @@ export const getCountriesByRegion: any = createAsyncThunk(
 	}
 );
 
+export const searchCountryByName: any = createAsyncThunk(
+	"allCountries/getCountriesByRegion",
+	async (name: string, { rejectWithValue }) => {
+		try {
+			const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+			const data = await res.json();
+
+			if (res.status === 404) {
+				throw new Error();
+			}
+
+			return data;
+		} catch (error) {
+			return rejectWithValue("Error");
+		}
+	}
+);
+
 const allCountriesSlice = createSlice({
 	name: "allCountries",
 	initialState: {
 		loading: true,
 		countriesData: [],
+		error: false,
 	},
 	reducers: {},
 	extraReducers: {
@@ -42,6 +61,7 @@ const allCountriesSlice = createSlice({
 		[getAllCountries.fulfilled]: (state, action) => {
 			state.loading = false;
 			state.countriesData = action.payload;
+			state.error = false;
 		},
 
 		[getCountriesByRegion.pending]: (state) => {
@@ -50,6 +70,19 @@ const allCountriesSlice = createSlice({
 		[getCountriesByRegion.fulfilled]: (state, action) => {
 			state.loading = false;
 			state.countriesData = action.payload;
+			state.error = false;
+		},
+		[searchCountryByName.pending]: (state) => {
+			state.loading = true;
+		},
+		[searchCountryByName.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.countriesData = action.payload;
+			state.error = false;
+		},
+		[searchCountryByName.rejected]: (state, action) => {
+			state.loading = false;
+			state.error = true;
 		},
 	},
 });

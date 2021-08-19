@@ -5,6 +5,7 @@ import { darkTheme, lightTheme } from "./styles/Themes";
 import Home from "./pages/Home";
 import Details from "./pages/Details";
 import { RootStateOrAny, useSelector } from "react-redux";
+import Header from "./components/Header";
 
 const App = () => {
 	const { isDarkModeOn } = useSelector(
@@ -15,6 +16,7 @@ const App = () => {
 		<ThemeProvider theme={isDarkModeOn ? darkTheme : lightTheme}>
 			<GlobalStyles />
 			<Fragment>
+				<Header />
 				<Home />
 				{/* <Details /> */}
 			</Fragment>

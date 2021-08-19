@@ -18,18 +18,21 @@ const Home = () => {
 		dispatch(getAllCountries());
 	}, []);
 
-	const { countriesData, loading } = useSelector(
+	const { countriesData, loading, error } = useSelector(
 		(state: RootState) => state.countriesData
 	);
 
 	return (
 		<>
-			<Header />
 			<Container>
 				<SearchCountry />
 				<FilterRegion />
 			</Container>
-			{!loading ? (
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<h1>Not Found</h1>
+			) : (
 				<CountriesContainer>
 					{countriesData.map((country: any, index: number) => (
 						<LazyLoad key={index} offset={-100}>
@@ -37,8 +40,6 @@ const Home = () => {
 						</LazyLoad>
 					))}
 				</CountriesContainer>
-			) : (
-				<Loader />
 			)}
 		</>
 	);

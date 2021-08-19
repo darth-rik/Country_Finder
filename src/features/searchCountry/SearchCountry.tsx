@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { device } from "../../styles/breakpoints";
+import {
+	searchCountryByName,
+	getAllCountries,
+} from "../countryCard/countryCardSlice";
 
 const SearchCountry = () => {
+	const [value, setValue] = useState("");
+
+	const onChange = (e: any) => {
+		setValue(e.target.value);
+	};
+
+	const dispatch = useDispatch();
+
 	return (
 		<Wrapper>
 			<SearchIcon>
 				<BiSearchAlt2 />
 			</SearchIcon>
 
-			<input placeholder='Search for a country...' type='text' />
+			<input
+				onChange={onChange}
+				value={value}
+				onKeyUp={_.debounce((e: any) => {
+					if (!e.target.value) {
+						dispatch(getAllCountries());
+					} else dispatch(searchCountryByName(e.target.value));
+				}, 500)}
+				placeholder='Search for a country...'
+				type='text'
+			/>
 		</Wrapper>
 	);
 };

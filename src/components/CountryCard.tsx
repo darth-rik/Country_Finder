@@ -39,7 +39,7 @@ const CountryFlag = styled.div`
 	img {
 		height: 25rem;
 		width: 100%;
-		object-fit: fill;
+		object-fit: cover;
 	}
 `;
 const CountryName = styled.h1`

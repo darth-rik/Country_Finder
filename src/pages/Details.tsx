@@ -6,7 +6,6 @@ import Header from "../components/Header";
 const Details = () => {
 	return (
 		<>
-			<Header />
 			<BackButton />
 			<CountryDetails />
 		</>
