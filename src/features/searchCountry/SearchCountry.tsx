@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import _ from "lodash";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../store";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { GrClose } from "react-icons/gr";
 import { device } from "../../styles/breakpoints";
 import {
-	searchCountryByName,
-	getAllCountries,
+	searchByName,
+	getCountriesByRegion,
 } from "../countryCard/countryCardSlice";
 
 const SearchCountry = () => {
@@ -16,22 +17,43 @@ const SearchCountry = () => {
 		setValue(e.target.value);
 	};
 
+	const { countryRegion } = useSelector(
+		(state: RootState) => state.countriesData
+	);
+
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		if (!value) dispatch(getCountriesByRegion(countryRegion));
+	}, [value]);
+
 	return (
-		<Wrapper>
+		<Wrapper
+			onSubmit={(e: any) => {
+				e.preventDefault();
+				if (value === " ") {
+					return;
+				} else {
+					dispatch(searchByName(value));
+				}
+			}}
+		>
 			<SearchIcon>
-				<BiSearchAlt2 />
+				{value ? (
+					<GrClose
+						onClick={() => {
+							dispatch(getCountriesByRegion(countryRegion));
+							setValue("");
+						}}
+					/>
+				) : (
+					<BiSearchAlt2 />
+				)}
 			</SearchIcon>
 
 			<input
 				onChange={onChange}
 				value={value}
-				onKeyUp={_.debounce((e: any) => {
-					if (!e.target.value) {
-						dispatch(getAllCountries());
-					} else dispatch(searchCountryByName(e.target.value));
-				}, 500)}
 				placeholder='Search for a country...'
 				type='text'
 			/>
@@ -39,7 +61,7 @@ const SearchCountry = () => {
 	);
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.form<{ onSubmit: any }>`
 	background-color: #fff;
 	padding: 1.5rem 3rem;
 	border-radius: 5px;
@@ -54,6 +76,7 @@ const Wrapper = styled.div`
 		font-size: 1.6rem;
 		width: 100%;
 		background-color: inherit;
+		color: ${({ theme }) => theme.text};
 
 		&::placeholder {
 			color: ${({ theme }) => theme.text};
@@ -74,6 +97,7 @@ const SearchIcon = styled.div`
 	display: flex;
 	align-items: center;
 	margin-right: 2rem;
+	cursor: pointer;
 `;
 
 export default SearchCountry;

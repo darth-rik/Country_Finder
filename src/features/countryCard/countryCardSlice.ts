@@ -16,39 +16,41 @@ export const getAllCountries: any = createAsyncThunk(
 export const getCountriesByRegion: any = createAsyncThunk(
 	"allCountries/getCountriesByRegion",
 	async (region: string) => {
+		let res;
 		try {
-			let res;
-			if (region === "All") {
+			if (region === "All" || region === "Filter By Region") {
 				res = await fetch(`https://restcountries.eu/rest/v2/all`);
 			} else {
 				res = await fetch(`https://restcountries.eu/rest/v2/region/${region}`);
 			}
-
 			const data = await res.json();
-			return data;
+			return {
+				data,
+				region,
+			};
 		} catch (error) {
 			console.log(error);
 		}
 	}
 );
 
-export const searchCountryByName: any = createAsyncThunk(
-	"allCountries/getCountriesByRegion",
-	async (name: string, { rejectWithValue }) => {
-		try {
-			const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
-			const data = await res.json();
+// export const searchCountryByName: any = createAsyncThunk(
+// 	"allCountries/getCountriesByRegion",
+// 	async (name: string, { rejectWithValue }) => {
+// 		try {
+// 			const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+// 			const data = await res.json();
 
-			if (res.status === 404) {
-				throw new Error();
-			}
+// 			if (res.status === 404) {
+// 				throw new Error();
+// 			}
 
-			return data;
-		} catch (error) {
-			return rejectWithValue("Error");
-		}
-	}
-);
+// 			return data;
+// 		} catch (error) {
+// 			return rejectWithValue("Error");
+// 		}
+// 	}
+// );
 
 const allCountriesSlice = createSlice({
 	name: "allCountries",
@@ -56,8 +58,18 @@ const allCountriesSlice = createSlice({
 		loading: true,
 		countriesData: [],
 		error: false,
+		countryRegion: "Filter By Region",
 	},
-	reducers: {},
+	reducers: {
+		searchByName: (state, action) => {
+			const filteredCountries = state.countriesData.filter((country: any) =>
+				country.name.toLowerCase().includes(action.payload.toLowerCase())
+			);
+
+			state.countriesData = filteredCountries || [];
+			state.error = state.countriesData.length > 0 ? false : true;
+		},
+	},
 	extraReducers: {
 		[getAllCountries.pending]: (state) => {
 			state.loading = true;
@@ -71,25 +83,30 @@ const allCountriesSlice = createSlice({
 		[getCountriesByRegion.pending]: (state) => {
 			state.loading = true;
 		},
-		[getCountriesByRegion.fulfilled]: (state, action) => {
+		[getCountriesByRegion.fulfilled]: (
+			state,
+			{ payload: { data, region } }
+		) => {
 			state.loading = false;
-			state.countriesData = action.payload;
+			state.countriesData = data;
 			state.error = false;
+			state.countryRegion = region;
 		},
 
-		[searchCountryByName.pending]: (state) => {
-			state.loading = true;
-		},
-		[searchCountryByName.fulfilled]: (state, action) => {
-			state.loading = false;
-			state.countriesData = action.payload;
-			state.error = false;
-		},
-		[searchCountryByName.rejected]: (state, action) => {
-			state.loading = false;
-			state.error = true;
-		},
+		// [searchCountryByName.pending]: (state) => {
+		// 	state.loading = true;
+		// },
+		// [searchCountryByName.fulfilled]: (state, action) => {
+		// 	state.loading = false;
+		// 	state.countriesData = action.payload;
+		// 	state.error = false;
+		// },
+		// [searchCountryByName.rejected]: (state, action) => {
+		// 	state.loading = false;
+		// 	state.error = true;
+		// },
 	},
 });
+export const { searchByName } = allCountriesSlice.actions;
 
 export default allCountriesSlice.reducer;

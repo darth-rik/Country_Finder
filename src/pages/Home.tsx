@@ -27,17 +27,18 @@ const Home = () => {
 				<SearchCountry />
 				<FilterRegion />
 			</Container>
-			{loading ? (
+			{!countriesData || loading ? (
 				<Loader />
 			) : error ? (
 				<h1>Not Found</h1>
 			) : (
 				<CountriesContainer>
-					{countriesData.map((country: any, index: number) => (
-						<LazyLoad key={index} offset={-100}>
-							<CountryCard country={country} />
-						</LazyLoad>
-					))}
+					{countriesData &&
+						countriesData.map((country: any, index: number) => (
+							<LazyLoad key={index} offset={-100}>
+								<CountryCard country={country} />
+							</LazyLoad>
+						))}
 				</CountriesContainer>
 			)}
 		</>
