@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import { device } from "../styles/breakpoints";
 import LazyLoad from "react-lazyload";
 import { RootState } from "../store";
+import ErrorMessage from "../components/ErrorMessage";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Home = () => {
 			{!countriesData || loading ? (
 				<Loader />
 			) : error ? (
-				<h1>Not Found</h1>
+				<ErrorMessage error={error} />
 			) : (
 				<CountriesContainer>
 					{countriesData &&

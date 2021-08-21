@@ -6,7 +6,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { device } from "../../styles/breakpoints";
 import {
-	searchByName,
+	searchCountryByName,
 	getCountriesByRegion,
 } from "../countryCard/countryCardSlice";
 
@@ -14,6 +14,9 @@ const SearchCountry = () => {
 	const [value, setValue] = useState("");
 
 	const onChange = (e: any) => {
+		if (e.target.value === "") {
+			dispatch(getCountriesByRegion(countryRegion));
+		}
 		setValue(e.target.value);
 	};
 
@@ -23,9 +26,9 @@ const SearchCountry = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (!value) dispatch(getCountriesByRegion(countryRegion));
-	}, [value]);
+	// useEffect(() => {
+	// 	if (!value)
+	// }, [value]);
 
 	return (
 		<Wrapper
@@ -34,7 +37,7 @@ const SearchCountry = () => {
 				if (value === " ") {
 					return;
 				} else {
-					dispatch(searchByName(value));
+					dispatch(searchCountryByName(value));
 				}
 			}}
 		>
