@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { GlobalStyles } from "./styles/globalStyles";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/Themes";
@@ -17,8 +17,8 @@ const App = () => {
 			<GlobalStyles />
 			<Fragment>
 				<Header />
-				{/* <Home /> */}
-				<Details />
+				<Home />
+				{/* <Details /> */}
 			</Fragment>
 		</ThemeProvider>
 	);

@@ -9,11 +9,11 @@ import { toggleMode } from "./darkModeButtonSlice";
 const DarkModeButton = () => {
 	const dispatch = useDispatch();
 
-	const toggler = () => {
-		dispatch(toggleMode(isDarkModeOn ? false : true));
-	};
-
 	const { isDarkModeOn } = useSelector((state: RootState) => state.darkMode);
+
+	const toggler = () => {
+		dispatch(toggleMode(!isDarkModeOn));
+	};
 
 	return (
 		<DarkModeToggle onClick={toggler}>
