@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const CountryCard = ({
 	country: { flag, name, population, capital, region },
 }: any) => {
+	const history = useHistory();
 	return (
-		<CardContainer>
+		<CardContainer onClick={() => history.push(`/${name}`)}>
 			<CountryFlag>
 				<img src={flag} alt={`flag of ${name}`} />
 			</CountryFlag>

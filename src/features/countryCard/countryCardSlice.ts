@@ -60,15 +60,7 @@ const allCountriesSlice = createSlice({
 		error: "",
 		countryRegion: "Filter By Region",
 	},
-	reducers: {
-		// searchByName: (state, action) => {
-		// 	const filteredCountries = state.countriesData.filter((country: any) =>
-		// 		country.name.toLowerCase().includes(action.payload.toLowerCase())
-		// 	);
-		// 	state.countriesData = filteredCountries || [];
-		// 	state.error = state.countriesData.length > 0 ? false : true;
-		// },
-	},
+	reducers: {},
 	extraReducers: {
 		[getAllCountries.pending]: (state) => {
 			state.loading = true;

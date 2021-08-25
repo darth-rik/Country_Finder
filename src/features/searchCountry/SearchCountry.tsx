@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../store";
@@ -25,10 +25,6 @@ const SearchCountry = () => {
 	);
 
 	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	if (!value)
-	// }, [value]);
 
 	return (
 		<Wrapper
