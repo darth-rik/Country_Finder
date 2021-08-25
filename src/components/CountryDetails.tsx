@@ -58,7 +58,7 @@ const CountryDetails = ({
 							<h2>Currencies:</h2>
 							{currencies.map((curr: any, index: number) => (
 								<p key={index}>
-									{curr.name} {currencies.length - 1 !== index && ", " + "  "}{" "}
+									{curr.name} {currencies.length - 1 !== index && ", "}{" "}
 								</p>
 							))}
 						</Details>
@@ -96,6 +96,7 @@ const CountryFlag = styled.div`
 		width: 100%;
 		@media ${device.laptop} {
 			width: 80%;
+			height: 50rem;
 		}
 	}
 `;

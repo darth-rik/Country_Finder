@@ -5,10 +5,12 @@ export const getCountryDetails: any = createAsyncThunk(
 	async (code: string, { rejectWithValue }) => {
 		try {
 			const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${code}`);
-			const data = await res.json();
+
 			if (res.status === 404) {
-				throw new Error("Oops! That didn't work. Please try again.");
+				throw new Error("Failed to fetch Data");
 			}
+			const data = await res.json();
+
 			return data;
 		} catch (error: any) {
 			console.log(error);

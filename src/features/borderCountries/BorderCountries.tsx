@@ -65,12 +65,13 @@ const CountriesContainer = styled.div``;
 const Buttons = styled.button`
 	background-color: ${({ theme }) => theme.elements};
 	color: inherit;
-	width: 10rem;
-	padding: 0.7rem 1rem;
+
+	padding: 1rem 3rem;
+
 	border: none;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
-	margin: 0.5rem;
+	margin: 1rem;
 	cursor: pointer;
 `;
 export default BorderCountries;

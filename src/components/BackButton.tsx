@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { device } from "../styles/breakpoints";
+import { useHistory } from "react-router";
 
 const BackButton = () => {
+	const history = useHistory();
 	return (
-		<Wrapper>
+		<Wrapper onClick={() => history.goBack()}>
 			<BsArrowLeft />
 			<span>Back</span>
 		</Wrapper>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import DarkModeButton from "../features/darkModeButton/DarkModeButton";
@@ -7,7 +8,10 @@ import { device } from "../styles/breakpoints";
 const Header = () => {
 	return (
 		<Wrapper>
-			<Title>Where in the world?</Title>
+			<Title>
+				{" "}
+				<Link to='/'> Where in the world? </Link>{" "}
+			</Title>
 			<DarkModeButton />
 		</Wrapper>
 	);
@@ -30,6 +34,11 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
 	font-size: 1.6rem;
+
+	& > * {
+		color: inherit;
+		text-decoration: none;
+	}
 
 	@media ${device.laptopL} {
 		font-size: 2rem;
