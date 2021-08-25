@@ -3,54 +3,77 @@ import styled from "styled-components";
 import BorderCountries from "../features/borderCountries/BorderCountries";
 import { device } from "../styles/breakpoints";
 
-const CountryDetails = () => {
+const CountryDetails = ({
+	countryDetails: {
+		name,
+		region,
+		subregion,
+		nativeName,
+		currencies,
+		capital,
+		languages,
+		flag,
+		topLevelDomain,
+		population,
+		borders,
+	},
+}: any) => {
 	return (
 		<Container>
 			<CountryFlag>
-				<img src='https://restcountries.eu/data/umi.svg' alt='' />
+				<img src={flag} alt='' />
 			</CountryFlag>
 
 			<CountryInfoContainer>
-				<CountryName>United States of America</CountryName>
+				<CountryName>{name}</CountryName>
 				<DetailsContainer>
 					<DetailsPrimary>
 						<Details>
 							<h2>Native Name:</h2>
-							<p>Belgie</p>{" "}
+							<p>{nativeName}</p>{" "}
 						</Details>
 						<Details>
 							<h2>Population:</h2>
-							<p>Belgie</p>{" "}
+							<p>{population.toLocaleString("en-US")}</p>{" "}
 						</Details>
 						<Details>
 							<h2>Region:</h2>
-							<p>Belgie</p>{" "}
+							<p>{region}</p>{" "}
 						</Details>
 						<Details>
 							<h2>Sub-Region:</h2>
-							<p>Belgie</p>{" "}
+							<p>{subregion}</p>{" "}
 						</Details>
 						<Details>
 							<h2>Capital:</h2>
-							<p>Belgie</p>{" "}
+							<p>{capital}</p>{" "}
 						</Details>
 					</DetailsPrimary>
 					<DetailsSecondary>
 						<Details>
 							<h2>Top Level Domain:</h2>
-							<p>Belgie</p>{" "}
+							<p>{topLevelDomain}</p>{" "}
 						</Details>
 						<Details>
 							<h2>Currencies:</h2>
-							<p>Belgie</p>{" "}
+							{currencies.map((curr: any, index: number) => (
+								<p key={index}>
+									{curr.name} {currencies.length - 1 !== index && ", " + "  "}{" "}
+								</p>
+							))}
 						</Details>
 						<Details>
 							<h2>Languages:</h2>
-							<p>Belgie</p>{" "}
+							{languages.map((lang: any, index: number) => (
+								<p key={index}>
+									{lang.name}
+									{languages.length - 1 !== index && ","}{" "}
+								</p>
+							))}
 						</Details>
 					</DetailsSecondary>
 				</DetailsContainer>
-				<BorderCountries />
+				{borders.length > 0 && <BorderCountries borders={borders} />}
 			</CountryInfoContainer>
 		</Container>
 	);
