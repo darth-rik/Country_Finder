@@ -3,6 +3,22 @@ import styled from "styled-components";
 import BorderCountries from "../features/borderCountries/BorderCountries";
 import { device } from "../styles/breakpoints";
 
+type Props = {
+	countryDetails: {
+		name: string;
+		region: string;
+		subregion: string;
+		nativeName: string;
+		currencies: {}[];
+		capital: string;
+		languages: {}[];
+		flag: string;
+		topLevelDomain: string;
+		population: number;
+		borders: string[];
+	};
+};
+
 const CountryDetails = ({
 	countryDetails: {
 		name,
@@ -17,7 +33,7 @@ const CountryDetails = ({
 		population,
 		borders,
 	},
-}: any) => {
+}: Props) => {
 	return (
 		<Container>
 			<CountryFlag>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getCountryDetails: any = createAsyncThunk(
+export const getCountryDetails = createAsyncThunk(
 	"countryDetails/getCountryDetails",
 	async (code: string, { rejectWithValue }) => {
 		try {
@@ -19,7 +19,7 @@ export const getCountryDetails: any = createAsyncThunk(
 	}
 );
 
-export const getBorderCountries: any = createAsyncThunk(
+export const getBorderCountries = createAsyncThunk(
 	"countryDetails/getBorderCountries",
 	async (code: string, { rejectWithValue }) => {
 		try {
@@ -40,6 +40,13 @@ export const getBorderCountries: any = createAsyncThunk(
 	}
 );
 
+type IState = {
+	country: {};
+	loading: boolean;
+	error: string | any;
+	borderCountries: [];
+};
+
 export const countryDetailsSlice = createSlice({
 	name: "countryDetails",
 	initialState: {
@@ -47,33 +54,36 @@ export const countryDetailsSlice = createSlice({
 		loading: true,
 		error: "",
 		borderCountries: [],
-	},
+	} as IState,
 	reducers: {},
-	extraReducers: {
-		[getCountryDetails.pending]: (state) => {
+	extraReducers: (builder) => {
+		builder.addCase(getCountryDetails.pending, (state) => {
 			state.loading = true;
-		},
-		[getCountryDetails.fulfilled]: (state, action) => {
+		});
+		builder.addCase(getCountryDetails.fulfilled, (state, action) => {
 			state.loading = false;
 			state.country = action.payload;
 			state.borderCountries = [];
-		},
-		[getCountryDetails.rejected]: (state, action) => {
+		});
+		builder.addCase(getCountryDetails.rejected, (state, action) => {
 			state.loading = false;
 			state.error = action.payload;
 			state.country = {};
-		},
+		});
 
-		[getBorderCountries.fulfilled]: (
-			state: { borderCountries: { name: string; code: string }[] },
-			action
-		) => {
-			state.borderCountries.push(action.payload);
-		},
-		[getBorderCountries.rejected]: (state, action) => {
+		builder.addCase(
+			getBorderCountries.fulfilled,
+			(
+				state: { borderCountries: { name: string; code: string }[] },
+				action
+			) => {
+				state.borderCountries.push(action.payload);
+			}
+		);
+		builder.addCase(getBorderCountries.rejected, (state, action) => {
 			state.error = action.payload;
 			state.country = {};
-		},
+		});
 	},
 });
 

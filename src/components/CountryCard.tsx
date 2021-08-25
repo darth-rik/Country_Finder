@@ -2,9 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+type Props = {
+	country: {
+		population: number;
+		flag: string;
+		name: string;
+		capital: string;
+		region: string;
+		alpha3Code: string;
+	};
+};
+
 const CountryCard = ({
 	country: { flag, name, population, capital, region, alpha3Code },
-}: any) => {
+}: Props) => {
 	const history = useHistory();
 	return (
 		<CardContainer onClick={() => history.push(`/${alpha3Code}`)}>

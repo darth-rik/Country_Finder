@@ -3,7 +3,7 @@ import BackButton from "../components/BackButton";
 import CountryDetails from "../components/CountryDetails";
 import { getCountryDetails } from "../features/countryCard/countryDetailsSlice";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 

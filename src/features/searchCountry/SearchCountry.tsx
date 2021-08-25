@@ -28,7 +28,7 @@ const SearchCountry = () => {
 
 	return (
 		<Wrapper
-			onSubmit={(e: any) => {
+			onSubmit={(e: React.ChangeEvent) => {
 				e.preventDefault();
 				if (value === " ") {
 					return;
