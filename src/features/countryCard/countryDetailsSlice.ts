@@ -4,7 +4,7 @@ export const getCountryDetails = createAsyncThunk(
 	"countryDetails/getCountryDetails",
 	async (code: string, { rejectWithValue }) => {
 		try {
-			const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${code}`);
+			const res = await fetch(`https://restcountries.com/rest/v2/alpha/${code}`);
 
 			if (res.status === 404) {
 				throw new Error("Failed to fetch Data");
@@ -23,7 +23,7 @@ export const getBorderCountries = createAsyncThunk(
 	"countryDetails/getBorderCountries",
 	async (code: string, { rejectWithValue }) => {
 		try {
-			const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${code}`);
+			const res = await fetch(`https://restcountries.com/rest/v2/alpha/${code}`);
 			const data = await res.json();
 			const countryInfo = {
 				name: data.name,

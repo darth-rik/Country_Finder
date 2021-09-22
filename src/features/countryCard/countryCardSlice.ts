@@ -4,7 +4,7 @@ export const getAllCountries = createAsyncThunk(
 	"allCountries/getAllCountries",
 	async () => {
 		try {
-			const res = await fetch("https://restcountries.eu/rest/v2/all");
+			const res = await fetch("https://restcountries.com/rest/v2/all");
 			const data = await res.json();
 			return data;
 		} catch (error) {
@@ -19,9 +19,9 @@ export const getCountriesByRegion = createAsyncThunk(
 		let res;
 		try {
 			if (region === "All" || region === "Filter By Region") {
-				res = await fetch(`https://restcountries.eu/rest/v2/all`);
+				res = await fetch(`https://restcountries.com/rest/v2/all`);
 			} else {
-				res = await fetch(`https://restcountries.eu/rest/v2/region/${region}`);
+				res = await fetch(`https://restcountries.com/rest/v2/region/${region}`);
 			}
 			const data: {}[] = await res.json();
 			return {
@@ -38,7 +38,7 @@ export const searchCountryByName = createAsyncThunk(
 	"allCountries/getCountriesByName",
 	async (name: string, { rejectWithValue }) => {
 		try {
-			const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+			const res = await fetch(`https://restcountries.com/rest/v2/name/${name}`);
 			const data = await res.json();
 
 			if (res.status === 404) {
