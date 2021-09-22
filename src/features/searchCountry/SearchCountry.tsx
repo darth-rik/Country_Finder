@@ -13,7 +13,7 @@ import {
 const SearchCountry = () => {
 	const [value, setValue] = useState("");
 
-	const onChange = (e: any) => {
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.value === "") {
 			dispatch(getCountriesByRegion(countryRegion));
 		}
