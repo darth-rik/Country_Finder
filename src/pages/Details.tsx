@@ -13,7 +13,7 @@ const Details = () => {
 
 	useEffect(() => {
 		dispatch(getCountryDetails(params.name));
-	}, [params.name]);
+	}, [params.name, dispatch]);
 
 	const { country, loading, error } = useSelector(
 		(state: RootStateOrAny) => state.countryDetails

@@ -28,7 +28,7 @@ const SearchCountry = () => {
 
 	return (
 		<Wrapper
-			onSubmit={(e: React.ChangeEvent) => {
+			onSubmit={(e: React.FormEvent) => {
 				e.preventDefault();
 				if (value === " ") {
 					return;
@@ -60,7 +60,7 @@ const SearchCountry = () => {
 	);
 };
 
-const Wrapper = styled.form<{ onSubmit: any }>`
+const Wrapper = styled.form<{ onSubmit: React.FormEventHandler<HTMLInputElement>}>`
 	background-color: #fff;
 	padding: 1.5rem 3rem;
 	border-radius: 5px;

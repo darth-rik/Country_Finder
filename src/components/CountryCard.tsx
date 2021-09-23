@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 type Props = {
 	country: {
 		population: number;
-		flag: string;
+		flags: string[];
 		name: string;
 		capital: string;
 		region: string;
@@ -14,13 +14,13 @@ type Props = {
 };
 
 const CountryCard = ({
-	country: { flag, name, population, capital, region, alpha3Code },
+	country: { flags, name, population, capital, region, alpha3Code },
 }: Props) => {
 	const history = useHistory();
 	return (
 		<CardContainer onClick={() => history.push(`/${alpha3Code}`)}>
 			<CountryFlag>
-				<img src={flag} alt={`flag of ${name}`} />
+				<img src={flags[0]} alt={`flag of ${name}`} />
 			</CountryFlag>
 			<InfoContainer>
 				<CountryName>{name}</CountryName>
