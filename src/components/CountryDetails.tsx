@@ -89,7 +89,7 @@ const CountryDetails = ({
 						</Details>
 					</DetailsSecondary>
 				</DetailsContainer>
-				{borders.length > 0 && <BorderCountries borders={borders} />}
+				{borders?.length > 0 && <BorderCountries borders={borders} />}
 			</CountryInfoContainer>
 		</Container>
 	);
