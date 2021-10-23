@@ -17,19 +17,19 @@ const BorderCountries = ({ borders }: Props) => {
 		borders.forEach((countryCode: string) => {
 			dispatch(getBorderCountries(countryCode));
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const { borderCountries } = useSelector(
 		(state: RootStateOrAny) => state.countryDetails
 	);
-
 	return (
 		<Container>
 			<Heading>Border Countries:</Heading>
 			<CountriesContainer>
-				{borderCountries &&
-					borderCountries.map(
-						(country: { name: string; code: string }, index: number) => (
+				{
+					borderCountries?.map(
+						(country: { name:  string; code: string }, index: number) => (
 							<Buttons
 								onClick={() => history.push(`/${country.code}`)}
 								key={index}

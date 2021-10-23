@@ -5,25 +5,30 @@ import { useHistory } from "react-router-dom";
 type Props = {
 	country: {
 		population: number;
-		flags: string[];
-		name: string;
-		capital: string;
+		flags: {
+			png: string,
+			svg: string
+		};
+		name: {
+			common: string
+		};
+		capital: string[];
 		region: string;
-		alpha3Code: string;
+		cca2: string;
 	};
 };
 
 const CountryCard = ({
-	country: { flags, name, population, capital, region, alpha3Code },
+	country: { flags, name, population, capital, region, cca2 },
 }: Props) => {
 	const history = useHistory();
 	return (
-		<CardContainer onClick={() => history.push(`/${alpha3Code}`)}>
+		<CardContainer onClick={() => history.push(`/${cca2}`)}>
 			<CountryFlag>
-				<img src={flags[0]} alt={`flag of ${name}`} />
+				<img src={flags.svg} alt={`flag of ${name}`} />
 			</CountryFlag>
 			<InfoContainer>
-				<CountryName>{name}</CountryName>
+				<CountryName>{name.common}</CountryName>
 				<CountryDetails>
 					<h2>Population:</h2>
 					<p>{population.toLocaleString("en-US")}</p>{" "}
@@ -34,7 +39,7 @@ const CountryCard = ({
 				</CountryDetails>
 				<CountryDetails>
 					<h2>Capital:</h2>
-					<p>{capital}</p>{" "}
+					{capital?.map((cap, ind)=> (<p key={ind} >{cap}</p>) )}{" "}
 				</CountryDetails>
 			</InfoContainer>
 		</CardContainer>

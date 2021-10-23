@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { device } from "./breakpoints";
 
 type Theme = {
 	theme: {

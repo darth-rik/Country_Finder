@@ -16,6 +16,7 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(getAllCountries());
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const { countriesData, loading, error } = useSelector(

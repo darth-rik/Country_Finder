@@ -12,7 +12,10 @@ type Props = {
 		currencies: {}[];
 		capital: string;
 		languages: {}[];
-		flags: string[];
+		flags: {
+			png: string,
+			svg: string
+		};
 		topLevelDomain: string;
 		population: number;
 		borders: string[];
@@ -37,7 +40,7 @@ const CountryDetails = ({
 	return (
 		<Container>
 			<CountryFlag>
-				<img src={flags[0]} alt='' />
+				<img src={flags.svg} alt='' />
 			</CountryFlag>
 
 			<CountryInfoContainer>

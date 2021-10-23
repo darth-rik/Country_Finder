@@ -4,7 +4,7 @@ export const getAllCountries = createAsyncThunk(
 	"allCountries/getAllCountries",
 	async () => {
 		try {
-			const res = await fetch("https://restcountries.com/v2/all");
+			const res = await fetch("https://restcountries.com/v3.1/all");
 			const data = await res.json();
 			return data;
 		} catch (error) {
@@ -18,10 +18,11 @@ export const getCountriesByRegion = createAsyncThunk(
 	async (region: string) => {
 		let res;
 		try {
+			console.log(region)
 			if (region === "All" || region === "Filter By Region") {
-				res = await fetch(`https://restcountries.com/v2/all`);
+				res = await fetch(`https://restcountries.com/v3.1/all`);
 			} else {
-				res = await fetch(`https://restcountries.com/v2/continent/${region}`);
+				res = await fetch(`https://restcountries.com/v3.1/region/${region}`);
 			}
 			const data: {}[] = await res.json();
 			return {
@@ -38,7 +39,7 @@ export const searchCountryByName = createAsyncThunk(
 	"allCountries/getCountriesByName",
 	async (name: string, { rejectWithValue }) => {
 		try {
-			const res = await fetch(`https://restcountries.com/v2/name/${name}`);
+			const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
 			const data = await res.json();
 
 			
@@ -105,8 +106,8 @@ const allCountriesSlice = createSlice({
 		builder.addCase(searchCountryByName.fulfilled, (state, action) => {
 			
 			const filteredCountryList = action.payload.filter(
-				(country: { continent: string }) =>
-					country.continent === state.countryRegion
+				(country: { region: string }) =>
+					country.region === state.countryRegion
 						? country
 						: state.countryRegion === "All" ||
 						  state.countryRegion === "Filter By Region"
